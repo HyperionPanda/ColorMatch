@@ -30,13 +30,10 @@ public class ConverterGUI {
     }
 
     private void UI() {
-        String buttonPressed = "";
-        Boolean blinking_done = false;
-        //under here for new before listener stuff
         Map<Map<JButton, Color>, List<JButton>> pattern = null;
         Set<Map<JButton,Color>> keys = null;
         List<JButton> order;
-        Boolean game = false;
+        boolean game = false;
 
 
 
@@ -91,7 +88,7 @@ public class ConverterGUI {
         bottomLeft.setBackground(gm.chooseButtonColor());
         bottomRight.setBackground(gm.chooseButtonColor());
 
-        //Add the frames using frame.add(framename);
+        //Add the frames using frame.add(frameName);
         frame.add(changeIt);
         frame.add(topLeft);
         frame.add(topRight);
@@ -196,83 +193,6 @@ public class ConverterGUI {
         topRight.addActionListener(newListener);
         bottomLeft.addActionListener(newListener);
         bottomRight.addActionListener(newListener);
-
-        /*
-        //Create listener for doing stuff
-        ActionListener newListener = new ActionListener() {
-            Map<Map<JButton, Color>, List<JButton>> pattern;
-            Set<Map<JButton,Color>> keys;
-            List<JButton> order;
-            Boolean game = false;
-
-            @Override
-            public void actionPerformed(ActionEvent event) {
-
-                try {
-                    String text = event.getActionCommand();
-
-                    //String unit = outputUnit.getSelectedItem().toString();
-                    String value = text;
-                    changeIt.setText(value);
-                    if(value.equals("BR")){
-                        pattern = gm.playGame(1);
-                        keys = pattern.keySet();
-                        game = true;
-
-                    }
-
-
-                } catch (Exception e) {
-                    changeIt.setText("Invalid Input");
-                }
-                if(game){
-
-                    order = pattern.get(keys.iterator().next());
-                    Map<JButton,Color> colors = new HashMap<>();
-                    for(int c = 0; c< order.size();c++){
-                        colors.put(order.get(c),order.get(c).getBackground());
-                    }
-
-                    Timer firstTimer = new Timer( 2000, new ActionListener(){
-                        private int initialCounter = 0;
-                        int numberOfLights = order.size();
-                        @Override
-                        public void actionPerformed(ActionEvent e){
-                            switch( initialCounter ){
-                                default:
-                                    JButton lightButton = order.get(initialCounter);
-                                    //lightButton.setBackground( colors.get(lightButton) );
-                                    lightButton.setBackground(Color.BLACK);
-                                    Timer blinkingTimer = new Timer( 1000, new ActionListener(){
-                                        @Override
-                                        public void actionPerformed(ActionEvent e){
-                                            //lightButton.setBackground(Color.BLACK);
-                                            lightButton.setBackground( colors.get(lightButton) );
-                                        }
-                                    });
-                                    blinkingTimer.setRepeats( false );
-                                    blinkingTimer.start();
-
-                            }
-                            initialCounter++;
-                            if ( initialCounter == numberOfLights ){
-                                ((Timer)e.getSource()).stop();
-
-                            }
-                        }
-                    } );
-                    firstTimer.setRepeats( true );
-                    firstTimer.start();
-
-
-                }
-
-
-
-            }
-        };
-         */
-
 
     }
 }
