@@ -163,21 +163,27 @@ public class ConverterGUI {
 
         ActionListener newListener = new ActionListener() {
             int actionClick = 0;
+            int correct = 0;
+            int wrong = 0;
             int overload = order.size();
             @Override
             public void actionPerformed(ActionEvent event) {
                 if(actionClick == overload){
                     System.out.println("Done");
+
                     topLeft.setEnabled(false);
                     topRight.setEnabled(false);
                     bottomLeft.setEnabled(false);
                     bottomRight.setEnabled(false);
+                    EndPage end = new EndPage(correct,wrong);
 
                 }else {
                     JButton button = order.get(actionClick);
                     if (button.getActionCommand().equals(event.getActionCommand())) {
+                        correct++;
                         System.out.println("True");
                     } else {
+                        wrong++;
                         System.out.println("False");
                         System.out.println(button.getActionCommand());
                         System.out.println(event.getActionCommand());
