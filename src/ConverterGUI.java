@@ -33,10 +33,8 @@ public class ConverterGUI {
         Map<Map<JButton, Color>, List<JButton>> pattern = null;
         Set<Map<JButton,Color>> keys = null;
         List<JButton> order;
+        BlinkTimer blink_button;
         boolean game = false;
-
-
-
 
         //Create and manage title
 
@@ -82,6 +80,7 @@ public class ConverterGUI {
         changeIt.setBounds(600, 450, 200, 30);
 
         GameMaster gm = new GameMaster(topLeft,topRight,bottomLeft,bottomRight);
+        blink_button = new BlinkTimer(gm);
 
         topLeft.setBackground(gm.chooseButtonColor());
         topRight.setBackground(gm.chooseButtonColor());
@@ -111,6 +110,7 @@ public class ConverterGUI {
         }
 
         order = pattern.get(keys.iterator().next());
+        blink_button.setOrder(order);
 
         if(game){
 
@@ -118,47 +118,11 @@ public class ConverterGUI {
             for(int c = 0; c< order.size();c++){
                 colors.put(order.get(c),order.get(c).getBackground());
             }
-
-            Timer firstTimer = new Timer( 2000, new ActionListener(){
-                private int initialCounter = 0;
-
-                int numberOfLights = order.size();
-                @Override
-                public void actionPerformed(ActionEvent e){
-                    switch( initialCounter ){
-                        default:
-                            JButton lightButton = order.get(initialCounter);
-                            //lightButton.setBackground( colors.get(lightButton) );
-                            lightButton.setBackground(Color.BLACK);
-                            Timer blinkingTimer = new Timer( 1000, new ActionListener(){
-                                @Override
-                                public void actionPerformed(ActionEvent e){
-                                    //lightButton.setBackground(Color.BLACK);
-                                    lightButton.setBackground( colors.get(lightButton) );
-                                }
-                            });
-                            blinkingTimer.setRepeats( false );
-                            blinkingTimer.start();
-
-
-                    }
-                    initialCounter++;
-                    if ( initialCounter == numberOfLights ){
-                        ((Timer)e.getSource()).stop();
-                        topLeft.setEnabled(true);
-                        topRight.setEnabled(true);
-                        bottomLeft.setEnabled(true);
-                        bottomRight.setEnabled(true);
-
-                    }
-                }
-            } );
-            firstTimer.setRepeats( true );
-            firstTimer.start();
-
-
+            blink_button.setColors(colors);
+            blink_button.gameBlink();
 
         }
+
 
 
         ActionListener newListener = new ActionListener() {
@@ -179,15 +143,24 @@ public class ConverterGUI {
 
                 }else {
                     JButton button = order.get(actionClick);
+                    JButton changed_button = (JButton)event.getSource();
+
                     if (button.getActionCommand().equals(event.getActionCommand())) {
                         correct++;
                         System.out.println("True");
+
+                        blink_button.clickBlink(changed_button,true);
+
                     } else {
                         wrong++;
                         System.out.println("False");
-                        System.out.println(button.getActionCommand());
-                        System.out.println(event.getActionCommand());
+                        //System.out.println(button.getActionCommand());
+                        //System.out.println(event.getActionCommand());
+
+
+                        blink_button.clickBlink(changed_button,false);
                     }
+
                     actionClick++;
                 }
             }

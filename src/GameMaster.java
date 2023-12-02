@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 public class GameMaster {
 
@@ -13,6 +10,7 @@ public class GameMaster {
     JButton buttonFour;
 
     List<JButton> buttonList = new ArrayList<>();
+    List<Color> colors = new ArrayList<>(Arrays.asList(Color.BLUE, Color.PINK, Color.ORANGE, Color.YELLOW));
 
 
 
@@ -59,17 +57,14 @@ public class GameMaster {
     }
 
     public Color chooseButtonColor (){
-        List<Color> colors = new ArrayList<>();
-        colors.add(Color.BLUE);
-        colors.add(Color.RED);
-        colors.add(Color.ORANGE);
-        colors.add(Color.GREEN);
 
         int min = 0;
         int max = colors.size()-1;
         int randomNum = min + (int)(Math.random() * ((max - min) + 1));
+        Color color = colors.get(randomNum);
+        colors.remove(randomNum);
 
-        return colors.get(randomNum);
+        return color;
 
     }
 
