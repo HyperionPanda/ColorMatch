@@ -10,12 +10,11 @@ import javax.swing.*;
 
 
 public class ConverterGUI {
+    int difficulty;
 
     private JFrame frame;
 
-    public ConverterGUI() {
-        initializeFrame();
-    }
+    public ConverterGUI(int difficulty) {this.difficulty = difficulty; initializeFrame();}
 
     private void initializeFrame() {
         frame = new JFrame("Vision Test");
@@ -35,6 +34,7 @@ public class ConverterGUI {
         List<JButton> order;
         BlinkTimer blink_button;
         boolean game = false;
+
 
         //Create and manage title
 
@@ -73,12 +73,6 @@ public class ConverterGUI {
         bottomRight.setEnabled(false);
 
 
-        //Create non-editable text field
-        JTextField changeIt = new JTextField(15);
-        changeIt.setEditable(false);
-        changeIt.setLocation(10, 200);
-        changeIt.setBounds(600, 450, 200, 30);
-
         GameMaster gm = new GameMaster(topLeft,topRight,bottomLeft,bottomRight);
         blink_button = new BlinkTimer(gm);
 
@@ -88,7 +82,6 @@ public class ConverterGUI {
         bottomRight.setBackground(gm.chooseButtonColor());
 
         //Add the frames using frame.add(frameName);
-        frame.add(changeIt);
         frame.add(topLeft);
         frame.add(topRight);
         frame.add(bottomLeft);
@@ -106,7 +99,8 @@ public class ConverterGUI {
 
 
         } catch (Exception e) {
-            changeIt.setText("Invalid Input");
+            System.out.println("Error");
+            System.out.println(e.getMessage());
         }
 
         order = pattern.get(keys.iterator().next());

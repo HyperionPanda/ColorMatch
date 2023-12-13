@@ -30,21 +30,32 @@ public class EndPage {
 
     private void UI() {
 
+        JLabel correct_label_name = new JLabel("Correct Name");
+        correct_label_name.setText("Correct Answers");
+        correct_label_name.setBounds(225,175,250,100);
+
+
+        JLabel incorrect_label_name = new JLabel("Incorrect Name");
+        incorrect_label_name.setText("Incorrect Answers");
+        incorrect_label_name.setBounds(525,175,250,100);
+
         JLabel correct_label = new JLabel("Correct answers");
         correct_label.setText(correct_score.toString());
         //correct_label.setOpaque(true);
-        correct_label.setLocation(100,100);
-        correct_label.setBounds(0,125,450,250);
+        correct_label.setBounds(275,225,100,100);
 
 
         JLabel incorrect_label = new JLabel("Incorrect answers");
         incorrect_label.setText(incorrect_score.toString());
         //correct_label.setOpaque(true);
-        incorrect_label.setLocation(100,100);
-        incorrect_label.setBounds(450,125,450,250);
+        incorrect_label.setBounds(575,225,100,100);
+
+
 
         frame.add(correct_label);
         frame.add(incorrect_label);
+        frame.add(correct_label_name);
+        frame.add(incorrect_label_name);
 
 
     }

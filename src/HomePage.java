@@ -41,6 +41,18 @@ public class HomePage {
         exit.setLocation(100,100);
         exit.setBounds(450,125,450,250);
 
+
+        JLabel label_difficulty = new JLabel("Difficulty");
+        label_difficulty.setBounds(413, 375, 200, 50);
+
+        //Create non-editable text field
+        JTextField difficulty = new JTextField(15);
+        difficulty.setEditable(true);
+        difficulty.setBounds(350, 425, 200, 30);
+        difficulty.setText("0");
+
+        frame.add(difficulty);
+        frame.add(label_difficulty);
         frame.add(start);
         frame.add(exit);
 
@@ -53,13 +65,14 @@ public class HomePage {
 
                     //String unit = outputUnit.getSelectedItem().toString();
                     String value = text;
+
                     if (value.equals("Exit")){
                         frame.dispose();
-                    }else if (value.equals("Start")){
-                        ConverterGUI cg = new ConverterGUI();
+                    }else if (value.equals("Start")) {
+                        int difficult = Integer.parseInt(difficulty.getText());
+                        ConverterGUI cg = new ConverterGUI(difficult);
                         frame.dispose();
                     }
-
 
                 } catch (Exception e) {
                     System.out.println(e);
