@@ -1,8 +1,5 @@
 public class App {
 
-    public static void main(String[] args) {
-        //ConverterGUI ui = new ConverterGUI();
-        HomePage home = new HomePage();
-    }
+    public static void main(String[] args) {new HomePage();}
 
 }

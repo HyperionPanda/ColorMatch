@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class EndPage {
 
@@ -17,7 +15,7 @@ public class EndPage {
     }
 
     private void initializeFrame() {
-        frame = new JFrame("End");
+        frame = new JFrame("EndPage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         UI();

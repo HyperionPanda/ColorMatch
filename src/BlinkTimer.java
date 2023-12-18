@@ -29,7 +29,7 @@ public class BlinkTimer {
         Timer firstTimer = new Timer(2000, new ActionListener() {
             private int initialCounter = 0;
 
-            int numberOfLights = order.size();
+            final int numberOfLights = order.size();
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,7 +90,7 @@ public class BlinkTimer {
 
                 ((Timer) e.getSource()).stop();
 
-                //putting button enableds here gets them re-enabled as the red flashes, not after
+                //putting button enabled here gets them re-enabled as the red flashes, not after
             }
         });
         firstTimer.setRepeats(true);

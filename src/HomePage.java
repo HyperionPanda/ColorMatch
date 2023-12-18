@@ -61,17 +61,17 @@ public class HomePage {
             public void actionPerformed(ActionEvent event) {
 
                 try {
-                    String text = event.getActionCommand();
+                    String value = event.getActionCommand();
 
-                    //String unit = outputUnit.getSelectedItem().toString();
-                    String value = text;
-
-                    if (value.equals("Exit")){
-                        frame.dispose();
-                    }else if (value.equals("Start")) {
-                        int difficult = Integer.parseInt(difficulty.getText());
-                        ConverterGUI cg = new ConverterGUI(difficult);
-                        frame.dispose();
+                    switch(value){
+                        case "Exit":
+                            frame.dispose();
+                            break;
+                        case "Start":
+                            int difficult = Integer.parseInt(difficulty.getText());
+                            new ConverterGUI(difficult);
+                            frame.dispose();
+                            break;
                     }
 
                 } catch (Exception e) {

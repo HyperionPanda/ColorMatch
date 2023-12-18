@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
-import javax.swing.Timer;
 
 
 import javax.swing.*;
@@ -34,15 +33,6 @@ public class ConverterGUI {
         List<JButton> order;
         BlinkTimer blink_button;
         boolean game = false;
-
-
-        //Create and manage title
-
-        /*
-        JLabel title = new JLabel("Vision test");
-        title.setBounds(60, 10, 400, 30);
-        */
-
 
         JButton topLeft = new JButton("TL");
         topLeft.setBorderPainted(false);
@@ -123,7 +113,7 @@ public class ConverterGUI {
             int actionClick = 0;
             int correct = 0;
             int wrong = 0;
-            int overload = order.size();
+            final int overload = order.size();
             @Override
             public void actionPerformed(ActionEvent event) {
                 if(actionClick == overload){
@@ -133,7 +123,8 @@ public class ConverterGUI {
                     topRight.setEnabled(false);
                     bottomLeft.setEnabled(false);
                     bottomRight.setEnabled(false);
-                    EndPage end = new EndPage(correct,wrong);
+                    new EndPage(correct,wrong);
+                    frame.dispose();
 
                 }else {
                     JButton button = order.get(actionClick);
@@ -148,10 +139,6 @@ public class ConverterGUI {
                     } else {
                         wrong++;
                         System.out.println("False");
-                        //System.out.println(button.getActionCommand());
-                        //System.out.println(event.getActionCommand());
-
-
                         blink_button.clickBlink(changed_button,false);
                     }
 
