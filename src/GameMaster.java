@@ -26,13 +26,11 @@ public class GameMaster {
     }
 
 
-    public Map<Map<JButton, Color>, List<JButton>> playGame(int difficulty){
-
+    public Map<Map<JButton, Color>, List<JButton>> playGame(){
 
         Map<Map<JButton, Color>, List<JButton>> pattern_Connection = new HashMap<>();
 
         //create all patterns (number based on difficulty)
-        for (int i = 0; i < difficulty; i++) {
             Map<JButton, Color> pattern_to_color = new HashMap<>();
             //For each button in a pattern, give them a color
 
@@ -47,10 +45,7 @@ public class GameMaster {
                 JButton button = buttonList.get(randomNum);
                 patterned.add(button);
             }
-
             pattern_Connection.put(pattern_to_color, patterned);
-
-        }
 
         return pattern_Connection;
 

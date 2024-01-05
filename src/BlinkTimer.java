@@ -23,10 +23,11 @@ public class BlinkTimer {
         this.colors = colors;
     }
 
-    public void gameBlink() {
+    public void gameBlink(int difficulty) {
 
+        int difficulty_time_change = 2000/difficulty;
 
-        Timer firstTimer = new Timer(2000, new ActionListener() {
+        Timer firstTimer = new Timer(difficulty_time_change, new ActionListener() {
             private int initialCounter = 0;
 
             final int numberOfLights = order.size();
@@ -38,7 +39,7 @@ public class BlinkTimer {
                 JButton lightButton = order.get(initialCounter);
                 //lightButton.setBackground( colors.get(lightButton) );
                 lightButton.setBackground(Color.BLACK);
-                Timer blinkingTimer = new Timer(1000, new ActionListener() {
+                Timer blinkingTimer = new Timer(difficulty_time_change/2, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //lightButton.setBackground(Color.BLACK);
@@ -55,7 +56,6 @@ public class BlinkTimer {
                     gm.buttonTwo.setEnabled(true);
                     gm.buttonThree.setEnabled(true);
                     gm.buttonFour.setEnabled(true);
-
 
                 }
             }

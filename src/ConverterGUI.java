@@ -9,7 +9,8 @@ import javax.swing.*;
 
 
 public class ConverterGUI {
-    int difficulty;
+    int difficulty = 1;
+    List<JButton> order = null;
 
     private JFrame frame;
 
@@ -30,7 +31,6 @@ public class ConverterGUI {
     private void UI() {
         Map<Map<JButton, Color>, List<JButton>> pattern = null;
         Set<Map<JButton,Color>> keys = null;
-        List<JButton> order;
         BlinkTimer blink_button;
         boolean game = false;
 
@@ -81,71 +81,64 @@ public class ConverterGUI {
 
         try {
 
-            pattern = gm.playGame(1);
-            keys = pattern.keySet();
+            pattern = gm.playGame();
+
             game = true;
-
-
-
 
         } catch (Exception e) {
             System.out.println("Error");
             System.out.println(e.getMessage());
         }
-
-        order = pattern.get(keys.iterator().next());
-        blink_button.setOrder(order);
-
         if(game){
 
-            Map<JButton,Color> colors = new HashMap<>();
-            for(int c = 0; c< order.size();c++){
-                colors.put(order.get(c),order.get(c).getBackground());
-            }
-            blink_button.setColors(colors);
-            blink_button.gameBlink();
+                keys = pattern.keySet();
+                order = pattern.get(keys.iterator().next());
+                blink_button.setOrder(order);
 
-        }
-
-
-
-        ActionListener newListener = new ActionListener() {
-            int actionClick = 0;
-            int correct = 0;
-            int wrong = 0;
-            final int overload = order.size();
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if(actionClick == overload){
-                    System.out.println("Done");
-
-                    topLeft.setEnabled(false);
-                    topRight.setEnabled(false);
-                    bottomLeft.setEnabled(false);
-                    bottomRight.setEnabled(false);
-                    new EndPage(correct,wrong);
-                    frame.dispose();
-
-                }else {
-                    JButton button = order.get(actionClick);
-                    JButton changed_button = (JButton)event.getSource();
-
-                    if (button.getActionCommand().equals(event.getActionCommand())) {
-                        correct++;
-                        System.out.println("True");
-
-                        blink_button.clickBlink(changed_button,true);
-
-                    } else {
-                        wrong++;
-                        System.out.println("False");
-                        blink_button.clickBlink(changed_button,false);
-                    }
-
-                    actionClick++;
+                Map<JButton, Color> colors = new HashMap<>();
+                for (int c = 0; c < order.size(); c++) {
+                    colors.put(order.get(c), order.get(c).getBackground());
                 }
-            }
-        };
+                blink_button.setColors(colors);
+                blink_button.gameBlink(difficulty);
+        }
+            ActionListener newListener = new ActionListener() {
+                int actionClick = 0;
+                int correct = 0;
+                int wrong = 0;
+                int overload = 10;
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    if(actionClick == overload) {
+                        System.out.println("Done");
+
+                        topLeft.setEnabled(false);
+                        topRight.setEnabled(false);
+                        bottomLeft.setEnabled(false);
+                        bottomRight.setEnabled(false);
+                        new EndPage(correct, wrong);
+                        frame.dispose();
+
+                    }else {
+                        JButton button = order.get(actionClick);
+                        JButton changed_button = (JButton)event.getSource();
+
+                        if (button.getActionCommand().equals(event.getActionCommand())) {
+                            correct++;
+                            System.out.println("True");
+
+                            blink_button.clickBlink(changed_button,true);
+
+                        } else {
+                            wrong++;
+                            System.out.println("False");
+                            blink_button.clickBlink(changed_button,false);
+                        }
+
+                        actionClick++;
+                    }
+                }
+            };
 
 
         // add ActionListener() to the button
